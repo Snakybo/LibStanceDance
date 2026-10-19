@@ -22,42 +22,41 @@
 
 local LibShapeshift = LibStub and LibStub("LibShapeshift-1.0", true)
 
-local interfaceVersion = select(4, GetBuildInfo())
+local _, _, _, interfaceVersion = GetBuildInfo()
 
 if LibShapeshift == nil or interfaceVersion < 16000 or interfaceVersion >= 20000 then
 	return
 end
 
 --- @type LibShapeshift-1.0.Forms
-LibShapeshift:SetForms({
-	WARRIOR = {
-		{ 2457 }, -- Battle Stance
-		{ 71 }, -- Defensive Stance
-		{ 2458 }, -- Berserker Stance
-	},
-	PALADIN = {
-		{ 465 }, -- Devotion Aura
-		{ 7294 }, -- Retribution Aura
-		{ 19746 }, -- Concentration Aura
-		{ 19876 }, -- Shadow Resistance Aura
-		{ 19888 }, -- Frost Resistance Aura
-		{ 19891 }, -- Fire Resistance Aura
-	},
-	HUNTER = {},
-	ROGUE = {
-		{ 1784 }, -- Stealth
-	},
-	PRIEST = {
-		{ 15473 }, -- Shadowform
-	},
-	SHAMAN = {},
-	MAGE = {},
-	WARLOCK = {},
-	DRUID = {
-		{ 9634, 5487 }, -- Dire Bear Form, Bear Form
-		{ 1066 }, -- Aquatic Form
-		{ 768 }, -- Cat Form
-		{ 783 }, -- Travel Form
-		{ 24858 }, -- Moonkin Form
+LibShapeshift:SetFormProvider({
+	version = 1,
+	forms = {
+		WARRIOR = {
+			{ 2457 }, -- Battle Stance
+			{ 71 }, -- Defensive Stance
+			{ 2458 } -- Berserker Stance
+		},
+		PALADIN = {
+			{ 10293, 10292, 1032, 10291, 643, 10290, 465 }, -- Devotion Aura
+			{ 10301, 10300, 10299, 10298, 7294 }, -- Retribution Aura
+			{ 19746 }, -- Concentration Aura
+			{ 19896, 19895, 19876 }, -- Shadow Resistance Aura
+			{ 19898, 19897, 19888 }, -- Frost Resistance Aura
+			{ 19900, 19899, 19891 }, -- Fire Resistance Aura
+		},
+		ROGUE = {
+			{ 1787, 1786, 1785, 1784 }, -- Stealth
+		},
+		PRIEST = {
+			{ 15473 }, -- Shadowform
+		},
+		DRUID = {
+			{ 9634, 5487 }, -- Dire Bear Form, Bear Form
+			{ 1066 }, -- Aquatic Form
+			{ 768 }, -- Cat Form
+			{ 783 }, -- Travel Form
+			{ 24858 }, -- Moonkin Form
+		}
 	}
 })

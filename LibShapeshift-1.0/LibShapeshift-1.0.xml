@@ -6,5 +6,5 @@
 	<Script file="FormsWrath.lua"/>
 	<Script file="FormsCata.lua"/>
 	<Script file="FormsMists.lua"/>
-	<Script file="FormsMidnight.lua"/>
+	<Script file="FormsRetail.lua"/>
 </Ui>
