@@ -28,7 +28,7 @@ if LibStanceDance == nil or interfaceVersion < 40400 or interfaceVersion >= 5000
 	return
 end
 
---- @type LibStanceDance.Provider
+---@type LibStanceDance.Provider
 LibStanceDance:SetFormProvider({
 	version = 1,
 	forms = {

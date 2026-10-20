@@ -24,18 +24,18 @@ if LibStub == nil then
 	error("LibStanceDance requires LibStub")
 end
 
---- @class LibStanceDance
---- @field private provider LibStanceDance.Provider
+---@class LibStanceDance
+---@field private provider LibStanceDance.Provider
 local LibStanceDance = LibStub:NewLibrary("LibStanceDance", 1)
 if LibStanceDance == nil then
 	return
 end
 
---- @class LibStanceDance.Provider
---- @field public version integer
---- @field public forms { [string|integer]: integer[][] }
+---@class LibStanceDance.Provider
+---@field public version integer
+---@field public forms { [string|integer]: integer[][] }
 
---- @param forms LibStanceDance.Provider
+---@param forms LibStanceDance.Provider
 function LibStanceDance:SetFormProvider(forms)
 	assert(type(forms) == "table", "bad argument #1: expected table, got " .. type(forms))
 
@@ -44,41 +44,41 @@ function LibStanceDance:SetFormProvider(forms)
 	end
 end
 
---- Iterate through the available shapshift forms for the given key.
+---Iterate through the available shapshift forms for the given key.
 ---
---- The key can either be a class file name, or specialization ID, depending on the game version. If specializations exist in the game version, the key should
---- be the specialization ID, otherwise, the key should be a class file name.
+---The key can either be a class file name, or specialization ID, depending on the game version. If specializations exist in the game version, the key should
+---be the specialization ID, otherwise, the key should be a class file name.
 
---- @param key integer|string
+---@param key integer|string
 function LibStanceDance:IterateForms(key)
 	return ipairs(CopyTable(self:GetFormsInternal(key)))
 end
 
---- Get the number of shapeshift forms available for the given key.
+---Get the number of shapeshift forms available for the given key.
 ---
---- The key can either be a class file name, or specialization ID, depending on the game version. If specializations exist in the game version, the key should
---- be the specialization ID, otherwise, the key should be a class file name.
+---The key can either be a class file name, or specialization ID, depending on the game version. If specializations exist in the game version, the key should
+---be the specialization ID, otherwise, the key should be a class file name.
 ---
---- @param key integer|string
---- @return integer
+---@param key integer|string
+---@return integer
 function LibStanceDance:GetNumForms(key)
 	return #self:GetFormsInternal(key)
 end
 
---- Get all available shapeshift forms available for the given key.
+---Get all available shapeshift forms available for the given key.
 ---
---- The key can either be a class file name, or specialization ID, depending on the game version. If specializations exist in the game version, the key should
---- be the specialization ID, otherwise, the key should be a class file name.
+---The key can either be a class file name, or specialization ID, depending on the game version. If specializations exist in the game version, the key should
+---be the specialization ID, otherwise, the key should be a class file name.
 ---
---- @param key integer|string
---- @return integer[][]
+---@param key integer|string
+---@return integer[][]
 function LibStanceDance:GetForms(key)
 	return CopyTable(self:GetFormsInternal(key))
 end
 
---- @private
---- @param specIdOrClassFileName integer|string
---- @return integer[][]
+---@private
+---@param specIdOrClassFileName integer|string
+---@return integer[][]
 function LibStanceDance:GetFormsInternal(specIdOrClassFileName)
 	local t = type(specIdOrClassFileName)
 	assert(t == "number" or t == "string", "bad argument #1: expected number or string, got " .. t)
