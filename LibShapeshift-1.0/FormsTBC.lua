@@ -35,7 +35,7 @@ LibShapeshift:SetFormProvider({
 		WARRIOR = {
 			{ 2457 }, -- Battle Stance
 			{ 71 }, -- Defensive Stance
-			{ 2458 } -- Berserker Stance
+			{ 2458 }, -- Berserker Stance
 		},
 		PALADIN = {
 			{ 27149, 10293, 10292, 1032, 10291, 643, 10290, 465 }, -- Devotion Aura

@@ -43,16 +43,12 @@ LibShapeshift:SetFormProvider({
 			{ 19746 }, -- Concentration Aura
 			{ 32223 }, -- Crusader Aura
 		},
-		HUNTER = {},
 		ROGUE = {
 			{ 1784 }, -- Stealth
 		},
 		PRIEST = {
 			{ 15473 }, -- Shadowform
 		},
-		SHAMAN = {},
-		MAGE = {},
-		WARLOCK = {},
 		DRUID = {
 			{ 9634, 5487 }, -- Dire Bear Form, Bear Form
 			{ 1066 }, -- Aquatic Form
