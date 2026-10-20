@@ -20,16 +20,16 @@
 -- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 -- SOFTWARE.
 
-local LibShapeshift = LibStub and LibStub("LibShapeshift-1.0", true)
+local LibStanceDance = LibStub and LibStub("LibStanceDance", true)
 
 local _, _, _, interfaceVersion = GetBuildInfo()
 
-if LibShapeshift == nil or interfaceVersion < 120000 or interfaceVersion >= 130000 then
+if LibStanceDance == nil or interfaceVersion < 120000 or interfaceVersion >= 130000 then
 	return
 end
 
---- @type LibShapeshift-1.0.Forms
-LibShapeshift:SetFormProvider({
+--- @type LibStanceDance.Provider
+LibStanceDance:SetFormProvider({
 	version = 1,
 	forms = {
 		-- Holy Paladin

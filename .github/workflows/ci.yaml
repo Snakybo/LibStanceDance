@@ -25,6 +25,6 @@ jobs:
       uses: actions/upload-artifact@v7
       if: success()
       with:
-        name: "LibShapeshift-1.0"
+        name: LibStanceDance
         path: .release/
         include-hidden-files: true

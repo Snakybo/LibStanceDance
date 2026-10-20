@@ -1,4 +1,4 @@
-# LibShapeshift-1.0
+# LibStanceDance
 
 There are two functions available, `GetForms(key)` and `IterateForms(key)`, both return all available forms for the given key. The key an either be a
 specialization ID, or a class file name, depending on the game version.
@@ -44,7 +44,7 @@ The order of the inner array is high rank -> low rank, so Devotion Aura (rank 7)
 In order to check exactly which version the player has unlocked, you can use `IsSpellKnown`:
 
 ```lua
-for _, spellIds in LibShapeshift:IterateForms("PALADIN") do
+for _, spellIds in LibStanceDance:IterateForms("PALADIN") do
 	-- Default to the rank 1 spell
 	local targetSpellId = spellIds[#spellIds]
 

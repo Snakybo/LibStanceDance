@@ -20,25 +20,23 @@
 -- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 -- SOFTWARE.
 
--- /run local a,b,c=table.concat,{},{};for d=1,GetNumShapeshiftForms() do local _,_,_,f=GetShapeshiftFormInfo(d);local e=C_Spell.GetSpellInfo(f).name;b[#b+1]=e;c[#c+1]=f;end print("{ "..a(c, ", ").." }, -- " ..a(b,", "))
-
 if LibStub == nil then
-	error("LibShapeshift-1.0 requires LibStub")
+	error("LibStanceDance requires LibStub")
 end
 
---- @class LibShapeshift-1.0
---- @field private provider LibShapeshift-1.0.Forms
-local LibShapeshift = LibStub:NewLibrary("LibShapeshift-1.0", 1)
-if LibShapeshift == nil then
+--- @class LibStanceDance
+--- @field private provider LibStanceDance.Provider
+local LibStanceDance = LibStub:NewLibrary("LibStanceDance", 1)
+if LibStanceDance == nil then
 	return
 end
 
---- @class LibShapeshift-1.0.Forms
+--- @class LibStanceDance.Provider
 --- @field public version integer
 --- @field public forms { [string|integer]: integer[][] }
 
---- @param forms LibShapeshift-1.0.Forms
-function LibShapeshift:SetFormProvider(forms)
+--- @param forms LibStanceDance.Provider
+function LibStanceDance:SetFormProvider(forms)
 	assert(type(forms) == "table", "bad argument #1: expected table, got " .. type(forms))
 
 	if self.provider == nil or forms.version > self.provider.version then
@@ -52,7 +50,7 @@ end
 --- be the specialization ID, otherwise, the key should be a class file name.
 
 --- @param key integer|string
-function LibShapeshift:IterateForms(key)
+function LibStanceDance:IterateForms(key)
 	return ipairs(CopyTable(self:GetFormsInternal(key)))
 end
 
@@ -63,7 +61,7 @@ end
 ---
 --- @param key integer|string
 --- @return integer
-function LibShapeshift:GetNumForms(key)
+function LibStanceDance:GetNumForms(key)
 	return #self:GetFormsInternal(key)
 end
 
@@ -74,14 +72,14 @@ end
 ---
 --- @param key integer|string
 --- @return integer[][]
-function LibShapeshift:GetForms(key)
+function LibStanceDance:GetForms(key)
 	return CopyTable(self:GetFormsInternal(key))
 end
 
 --- @private
 --- @param specIdOrClassFileName integer|string
 --- @return integer[][]
-function LibShapeshift:GetFormsInternal(specIdOrClassFileName)
+function LibStanceDance:GetFormsInternal(specIdOrClassFileName)
 	local t = type(specIdOrClassFileName)
 	assert(t == "number" or t == "string", "bad argument #1: expected number or string, got " .. t)
 
