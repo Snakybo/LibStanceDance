@@ -1,14 +1,14 @@
 name: Release
 
-permissions:
-  contents: write
-
 on:
   push:
     branches:
       - master
     tags:
-      - "r*"
+      - r*
+
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -16,7 +16,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
 
     - name: Package
       uses: BigWigsMods/packager@v2
