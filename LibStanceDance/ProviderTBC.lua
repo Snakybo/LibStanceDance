@@ -29,15 +29,17 @@ if LibStanceDance == nil or interfaceVersion < 20505 or interfaceVersion >= 3000
 end
 
 ---@type LibStanceDance.Provider
-LibStanceDance:SetFormProvider({
+LibStanceDance:SetProvider({
 	version = 1,
 	forms = {
-		WARRIOR = {
+		-- Warrior
+		[161] = {
 			{ 2457 }, -- Battle Stance
 			{ 71 }, -- Defensive Stance
 			{ 2458 }, -- Berserker Stance
 		},
-		PALADIN = {
+		-- Paladin
+		[382] = {
 			{ 27149, 10293, 10292, 1032, 10291, 643, 10290, 465 }, -- Devotion Aura
 			{ 27150, 10301, 10300, 10299, 10298, 7294 }, -- Retribution Aura
 			{ 19746 }, -- Concentration Aura
@@ -46,13 +48,16 @@ LibStanceDance:SetFormProvider({
 			{ 27153, 19900, 19899, 19891 }, -- Fire Resistance Aura
 			{ 32223 }, -- Crusader Aura
 		},
-		ROGUE = {
+		-- Rogue
+		[182] = {
 			{ 1787, 1786, 1785, 1784 }, -- Stealth
 		},
-		PRIEST = {
+		-- Priest
+		[201] = {
 			{ 15473 }, -- Shadowform
 		},
-		DRUID = {
+		-- Druid
+		[283] = {
 			{ 9634, 5487 }, -- Dire Bear Form, Bear Form
 			{ 1066 }, -- Aquatic Form
 			{ 768 }, -- Cat Form
@@ -60,6 +65,18 @@ LibStanceDance:SetFormProvider({
 			{ 24858 }, -- Moonkin Form,
 			{ 33891 }, -- Tree of Life
 			{ 40120, 33943 }, -- Swift Flight Form, Flight Form
-		}
-	}
+		},
+	},
+	aliases = {
+		[164] = 161,
+		[163] = 161,
+		[383] = 382,
+		[381] = 382,
+		[181] = 182,
+		[183] = 182,
+		[202] = 201,
+		[203] = 201,
+		[281] = 283,
+		[282] = 283,
+	},
 })

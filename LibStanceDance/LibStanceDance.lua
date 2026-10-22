@@ -20,77 +20,116 @@
 -- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 -- SOFTWARE.
 
+---@class LibStanceDance.Provider
+---@field public version integer
+---@field public forms table<integer, integer[][]>
+---@field public aliases table<integer, integer>?
+
+---@class LibStanceDance.Form
+---@field public spellIds integer[]
+---@field public spellId integer
+---@field public icon integer
+---@field public name string
+
 if LibStub == nil then
 	error("LibStanceDance requires LibStub")
 end
 
 ---@class LibStanceDance
----@field private provider LibStanceDance.Provider
-local LibStanceDance = LibStub:NewLibrary("LibStanceDance", 1)
+---@field private provider LibStanceDance.Provider?
+local LibStanceDance = LibStub:NewLibrary("LibStanceDance", 2)
 if LibStanceDance == nil then
 	return
 end
 
----@class LibStanceDance.Provider
----@field public version integer
----@field public forms { [string|integer]: integer[][] }
+local cache = {
+	--- @type table<integer, integer>
+	numForms = {},
 
----@param forms LibStanceDance.Provider
-function LibStanceDance:SetFormProvider(forms)
-	assert(type(forms) == "table", "bad argument #1: expected table, got " .. type(forms))
+	--- @type table<integer, LibStanceDance.Form[]>
+	forms = {},
+}
 
-	if self.provider == nil or forms.version > self.provider.version then
-		self.provider = forms
-	end
+local function ClearCache()
+	wipe(cache.numForms)
+	wipe(cache.forms)
 end
 
----Iterate through the available shapshift forms for the given key.
----
----The key can either be a class file name, or specialization ID, depending on the game version. If specializations exist in the game version, the key should
----be the specialization ID, otherwise, the key should be a class file name.
+---@param forms LibStanceDance.Provider
+function LibStanceDance:SetProvider(forms)
+	assert(type(forms) == "table", "bad argument #1: expected table, got " .. type(forms))
 
----@param key integer|string
-function LibStanceDance:IterateForms(key)
-	return ipairs(CopyTable(self:GetFormsInternal(key)))
+	if self.provider ~= nil and forms.version <= self.provider.version then
+		return
+	end
+
+	self.provider = forms
+	ClearCache()
 end
 
 ---Get the number of shapeshift forms available for the given key.
 ---
----The key can either be a class file name, or specialization ID, depending on the game version. If specializations exist in the game version, the key should
----be the specialization ID, otherwise, the key should be a class file name.
----
----@param key integer|string
+---@param specId integer
 ---@return integer
-function LibStanceDance:GetNumForms(key)
-	return #self:GetFormsInternal(key)
+function LibStanceDance:GetNumForms(specId)
+	assert(self.provider ~= nil, "No provider registered, register one first using 'SetProvider'.")
+
+	if cache.numForms[specId] ~= nil then
+		return cache.numForms[specId]
+	end
+
+	local result = #self:GetFormsInternal(specId)
+
+	cache.numForms[specId] = result
+	return result
 end
 
 ---Get all available shapeshift forms available for the given key.
 ---
----The key can either be a class file name, or specialization ID, depending on the game version. If specializations exist in the game version, the key should
----be the specialization ID, otherwise, the key should be a class file name.
----
----@param key integer|string
----@return integer[][]
-function LibStanceDance:GetForms(key)
-	return CopyTable(self:GetFormsInternal(key))
+---@param specId integer
+---@return LibStanceDance.Form[]
+function LibStanceDance:GetForms(specId)
+	assert(self.provider ~= nil, "No provider registered, register one first using 'SetProvider'.")
+
+	return CopyTable(self:GetFormsInternal(specId))
 end
 
 ---@private
----@param specIdOrClassFileName integer|string
----@return integer[][]
-function LibStanceDance:GetFormsInternal(specIdOrClassFileName)
-	local t = type(specIdOrClassFileName)
-	assert(t == "number" or t == "string", "bad argument #1: expected number or string, got " .. t)
+---@param specId integer
+---@return LibStanceDance.Form[]
+function LibStanceDance:GetFormsInternal(specId)
+	assert(self.provider ~= nil, "No provider registered, register one first using 'SetProvider'.")
 
-	if self.provider == nil then
-		return {}
+	if cache.forms[specId] ~= nil then
+		return cache.forms[specId]
 	end
 
-	local forms = self.provider.forms[specIdOrClassFileName]
+	if self.provider.aliases ~= nil then
+		specId = self.provider.aliases[specId] or specId
+	end
+
+	---@type integer[][]
+	local forms = self.provider.forms[specId]
 	if forms == nil then
 		return {}
 	end
 
-	return forms
+	---@type LibStanceDance.Form[]
+	local result = {}
+
+	for i = 1, #forms do
+		local spellId = forms[i][#forms[i]]
+		local name = C_Spell.GetSpellName(spellId)
+		local icon = C_Spell.GetSpellTexture(spellId)
+
+		result[i] = {
+			spellIds = forms[i],
+			spellId = spellId,
+			name = name,
+			icon = icon,
+		}
+	end
+
+	cache.forms[specId] = result
+	return result
 end

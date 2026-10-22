@@ -29,7 +29,7 @@ if LibStanceDance == nil or interfaceVersion < 120000 or interfaceVersion >= 130
 end
 
 ---@type LibStanceDance.Provider
-LibStanceDance:SetFormProvider({
+LibStanceDance:SetProvider({
 	version = 1,
 	forms = {
 		-- Holy Paladin

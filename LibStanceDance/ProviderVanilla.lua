@@ -24,44 +24,56 @@ local LibStanceDance = LibStub and LibStub("LibStanceDance", true)
 
 local _, _, _, interfaceVersion = GetBuildInfo()
 
-if LibStanceDance == nil or interfaceVersion < 40400 or interfaceVersion >= 50000 then
+if LibStanceDance == nil or interfaceVersion < 11300 or interfaceVersion >= 16000 then
 	return
 end
 
 ---@type LibStanceDance.Provider
-LibStanceDance:SetFormProvider({
+LibStanceDance:SetProvider({
 	version = 1,
 	forms = {
-		WARRIOR = {
+		-- Warrior
+		[161] = {
 			{ 2457 }, -- Battle Stance
 			{ 71 }, -- Defensive Stance
-			{ 2458 }, -- Berserker Stance
+			{ 2458 } -- Berserker Stance
 		},
-		PALADIN = {
-			{ 465 }, -- Devotion Aura
-			{ 7294 }, -- Retribution Aura
+		-- Paladin
+		[382] = {
+			{ 10293, 10292, 1032, 10291, 643, 10290, 465 }, -- Devotion Aura
+			{ 10301, 10300, 10299, 10298, 7294 }, -- Retribution Aura
 			{ 19746 }, -- Concentration Aura
-			{ 32223 }, -- Crusader Aura
+			{ 19896, 19895, 19876 }, -- Shadow Resistance Aura
+			{ 19898, 19897, 19888 }, -- Frost Resistance Aura
+			{ 19900, 19899, 19891 }, -- Fire Resistance Aura
 		},
-		ROGUE = {
-			{ 1784 }, -- Stealth
+		-- Rogue
+		[182] = {
+			{ 1787, 1786, 1785, 1784 }, -- Stealth
 		},
-		PRIEST = {
+		-- Priest
+		[201] = {
 			{ 15473 }, -- Shadowform
 		},
-		DRUID = {
+		-- Druid
+		[283] = {
 			{ 9634, 5487 }, -- Dire Bear Form, Bear Form
 			{ 1066 }, -- Aquatic Form
 			{ 768 }, -- Cat Form
 			{ 783 }, -- Travel Form
-			{ 24858 }, -- Moonkin Form,
-			{ 33891 }, -- Tree of Life
-			{ 40120, 33943 }, -- Swift Flight Form, Flight Form
+			{ 24858 }, -- Moonkin Form
 		},
-		DEATHKNIGHT = {
-			{ 48266 }, -- Blood Presence
-			{ 48263 }, -- Frost Presence
-			{ 48265 }, -- Unholy Presence
-		}
-	}
+	},
+	aliases = {
+		[164] = 161,
+		[163] = 161,
+		[383] = 382,
+		[381] = 382,
+		[181] = 182,
+		[183] = 182,
+		[202] = 201,
+		[203] = 201,
+		[281] = 283,
+		[282] = 283,
+	},
 })

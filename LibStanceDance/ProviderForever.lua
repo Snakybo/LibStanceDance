@@ -29,15 +29,17 @@ if LibStanceDance == nil or interfaceVersion < 16000 or interfaceVersion >= 2000
 end
 
 ---@type LibStanceDance.Provider
-LibStanceDance:SetFormProvider({
+LibStanceDance:SetProvider({
 	version = 1,
 	forms = {
-		WARRIOR = {
+		-- Warrior
+		[1491] = {
 			{ 2457 }, -- Battle Stance
 			{ 71 }, -- Defensive Stance
 			{ 2458 } -- Berserker Stance
 		},
-		PALADIN = {
+		-- Paladin
+		[1486] = {
 			{ 10293, 10292, 1032, 10291, 643, 10290, 465 }, -- Devotion Aura
 			{ 10301, 10300, 10299, 10298, 7294 }, -- Retribution Aura
 			{ 19746 }, -- Concentration Aura
@@ -45,13 +47,16 @@ LibStanceDance:SetFormProvider({
 			{ 19898, 19897, 19888 }, -- Frost Resistance Aura
 			{ 19900, 19899, 19891 }, -- Fire Resistance Aura
 		},
-		ROGUE = {
+		-- Rogue
+		[1488] = {
 			{ 1787, 1786, 1785, 1784 }, -- Stealth
 		},
-		PRIEST = {
+		-- Priest
+		[1487] = {
 			{ 15473 }, -- Shadowform
 		},
-		DRUID = {
+		-- Druid
+		[1484] = {
 			{ 9634, 5487 }, -- Dire Bear Form, Bear Form
 			{ 1066 }, -- Aquatic Form
 			{ 768 }, -- Cat Form
