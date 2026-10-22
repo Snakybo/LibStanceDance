@@ -20,23 +20,23 @@
 -- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 -- SOFTWARE.
 
----@class LibStanceDance.Provider
----@field public version integer
----@field public forms table<integer, integer[][]>
----@field public aliases table<integer, integer>?
+--- @class LibStanceDance.Provider
+--- @field public version integer
+--- @field public forms table<integer, integer[][]>
+--- @field public aliases table<integer, integer>?
 
----@class LibStanceDance.Form
----@field public spellIds integer[]
----@field public spellId integer
----@field public icon integer
----@field public name string
+--- @class LibStanceDance.Form
+--- @field public spellIds integer[]
+--- @field public spellId integer
+--- @field public icon integer
+--- @field public name string
 
 if LibStub == nil then
 	error("LibStanceDance requires LibStub")
 end
 
----@class LibStanceDance
----@field private provider LibStanceDance.Provider?
+--- @class LibStanceDance
+--- @field private provider LibStanceDance.Provider?
 local LibStanceDance = LibStub:NewLibrary("LibStanceDance", 2)
 if LibStanceDance == nil then
 	return
@@ -55,7 +55,7 @@ local function ClearCache()
 	wipe(cache.forms)
 end
 
----@param forms LibStanceDance.Provider
+--- @param forms LibStanceDance.Provider
 function LibStanceDance:SetProvider(forms)
 	assert(type(forms) == "table", "bad argument #1: expected table, got " .. type(forms))
 
@@ -67,10 +67,10 @@ function LibStanceDance:SetProvider(forms)
 	ClearCache()
 end
 
----Get the number of shapeshift forms available for the given key.
+--- Get the number of shapeshift forms available for the given key.
 ---
----@param specId integer
----@return integer
+--- @param specId integer
+--- @return integer
 function LibStanceDance:GetNumForms(specId)
 	assert(self.provider ~= nil, "No provider registered, register one first using 'SetProvider'.")
 
@@ -84,19 +84,19 @@ function LibStanceDance:GetNumForms(specId)
 	return result
 end
 
----Get all available shapeshift forms available for the given key.
+--- Get all available shapeshift forms available for the given key.
 ---
----@param specId integer
----@return LibStanceDance.Form[]
+--- @param specId integer
+--- @return LibStanceDance.Form[]
 function LibStanceDance:GetForms(specId)
 	assert(self.provider ~= nil, "No provider registered, register one first using 'SetProvider'.")
 
 	return CopyTable(self:GetFormsInternal(specId))
 end
 
----@private
----@param specId integer
----@return LibStanceDance.Form[]
+--- @private
+--- @param specId integer
+--- @return LibStanceDance.Form[]
 function LibStanceDance:GetFormsInternal(specId)
 	assert(self.provider ~= nil, "No provider registered, register one first using 'SetProvider'.")
 
@@ -108,13 +108,13 @@ function LibStanceDance:GetFormsInternal(specId)
 		specId = self.provider.aliases[specId] or specId
 	end
 
-	---@type integer[][]
+	--- @type integer[][]
 	local forms = self.provider.forms[specId]
 	if forms == nil then
 		return {}
 	end
 
-	---@type LibStanceDance.Form[]
+	--- @type LibStanceDance.Form[]
 	local result = {}
 
 	for i = 1, #forms do
