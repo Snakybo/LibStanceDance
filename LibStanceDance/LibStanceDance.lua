@@ -26,10 +26,10 @@
 --- @field public aliases table<integer, integer>?
 
 --- @class LibStanceDance.Form
---- @field public spellIds integer[]
---- @field public spellId integer
---- @field public icon integer
---- @field public name string
+--- @field public spellIds integer[] -- All spell IDs associated with this form, with the last entry being the rank 1 variant.
+--- @field public spellId integer    -- The spell ID of this form, typically the rank 1 variant.
+--- @field public icon integer       -- The icon associated with this form.
+--- @field public name string        -- The localized name of this form.
 
 if LibStub == nil then
 	error("LibStanceDance requires LibStub")
@@ -55,6 +55,8 @@ local function ClearCache()
 	wipe(cache.forms)
 end
 
+--- Set the data provider for the library, generally this is only used internally by the bundled providers.
+---
 --- @param forms LibStanceDance.Provider
 function LibStanceDance:SetProvider(forms)
 	assert(type(forms) == "table", "bad argument #1: expected table, got " .. type(forms))
@@ -67,7 +69,7 @@ function LibStanceDance:SetProvider(forms)
 	ClearCache()
 end
 
---- Get the number of shapeshift forms available for the given key.
+--- Get the number of shapeshift forms available for the given specialization.
 ---
 --- @param specId integer
 --- @return integer
@@ -84,7 +86,7 @@ function LibStanceDance:GetNumForms(specId)
 	return result
 end
 
---- Get all available shapeshift forms available for the given key.
+--- Get all available shapeshift forms available for the given specialization.
 ---
 --- @param specId integer
 --- @return LibStanceDance.Form[]
