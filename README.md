@@ -12,10 +12,15 @@ LibStanceDance is a library for World of Warcraft that provides a simple interfa
 
 ## Getting started
 
+### Dependencies
+
+* [LibStub](https://www.wowace.com/projects/libstub)
+
 ### Embedding
 
 ```yaml
 externals:
+  Libs/LibStub: https://repos.curseforge.com/wow/libstub/trunk
   Libs/LibStanceDance:
     url: https://github.com/Snakybo/LibStanceDance
 
@@ -23,7 +28,7 @@ move-folders:
   <ADDON>/Libs/LibStanceDance/LibStanceDance: <ADDON>/Libs/LibChroMacro
 ```
 
-Replace `<ADDON>` for your addon name, and simply add `Libs\LibChroMacro\LibChroMacro.xml` to your TOC file.
+Replace `<ADDON>` for your addon name, and simply add the libraries to your TOC file.
 
 ### Usage
 
